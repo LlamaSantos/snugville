@@ -6,6 +6,8 @@ Welcome snugs to Snugville.  It's only the snuggiest place on planet or and mayb
 
 Clone the repo :) and run `brew install go`
 
+* Note: If you have previous played with Go, we're going to migrate away from your prevous `GOPATH` to create a fresh environment to work from.  Check this by `echo $GOPATH` from the terminal to see if it is set to anything.
+
 ## Setting up your $GOPATH
 
 In your (.bashrc, .profile, .zshrc, et al) add the following line `export GOPATH=/path/to/your/repo/snugville`, example `export GOPATH=$HOME/code/snugville`
@@ -14,8 +16,17 @@ To immediately load the change run `source ~/.zshrc` or whatever shell file you 
 
 Additionally, if you want to use any installed go binaries you'll want to add the `bin` folder in your `GOPATH` to your `PATH`
 
+```
+export GOPATH=$HOME/code/snugville
+export PATH=$PATH:$GOPATH/bin
+```
+
 ## Visual Studio Code
 
 Install the `Go` extension from `lukehoban`, this will make your experience with go beyond better.  The extension is found here `https://marketplace.visualstudio.com/items?itemName=lukehoban.Go`.  Enabling `go.useLanguageServer` in Settings will give additional information whilst go-coding.
 
 ## Initializing
+
+* cd `src/snugs`
+* `chmod +x setup.sh`
+* `./setup.sh`
