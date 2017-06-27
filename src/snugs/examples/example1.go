@@ -23,4 +23,7 @@ func Example1() {
 	fmt.Printf("Hello world for the %vrd time\n", 3)
 
 	fmt.Printf("Hello from a Person %+v\n", Person{First: "Hello", Last: "World"})
+
+	err := fmt.Errorf("Creates a new error with %s", "this arg")
+	fmt.Printf(err.Error())
 }

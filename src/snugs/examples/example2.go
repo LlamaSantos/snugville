@@ -10,11 +10,6 @@ type BetterPerson struct {
 	Person
 }
 
-// Nameable describes
-type Nameable interface {
-	ToName() string
-}
-
 // ToName returns a formatted name
 func (bp BetterPerson) ToName() string {
 	return fmt.Sprintf("%s %s", bp.First, bp.Last)
