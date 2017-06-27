@@ -111,6 +111,16 @@ func showMeTheLoops() {
 
 }
 
+func conditionals() {
+	if true {
+		fmt.Printf("Of course this is true\n")
+	} else if true {
+		fmt.Printf("This would be true too")
+	} else {
+		fmt.Print("This is just never going to be called.")
+	}
+}
+
 // Basics illustrates the basic syntax of Go
 func Basics() {
 	fmt.Printf("----- Example 1 -----")
@@ -120,6 +130,9 @@ func Basics() {
 
 	// Slices
 	aSliceAtATime()
+
+	// Conditionals
+	conditionals()
 
 	// Defer, Panic, Recover
 	crappy()

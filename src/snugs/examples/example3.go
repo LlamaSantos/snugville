@@ -29,6 +29,23 @@ func (fp *FunctionalPerson) Called() int {
 	return fp.called
 }
 
+// ForgetfulPerson tries to modify state but doesn't have pointer receivers to the data gets reset
+type ForgetfulPerson struct {
+	Person
+	called int
+}
+
+// ToName returns the name of a ForgetfulPerson
+func (fp ForgetfulPerson) ToName() string {
+	fp.called++
+	return fmt.Sprintf("Doh %s, %s", fp.Last, fp.First)
+}
+
+// Called returns how many times ToName has been called, or does it?
+func (fp ForgetfulPerson) Called() int {
+	return fp.called
+}
+
 // Example3 contains examples for types and receivers
 func Example3() {
 	fmt.Println("----- Example 3 -----")
@@ -50,4 +67,12 @@ func Example3() {
 	person1.Last = "Hoffa"
 	write(person1)
 	called(person1)
+
+	// We need to look at receivers vs pointer-receivers
+	forgetme := new(ForgetfulPerson)
+	forgetme.First = "Mike"
+	forgetme.Last = "Tyson"
+	forgetme.called = 99 // neufballons
+	write(forgetme)      // Should increment
+	called(forgetme)     // Will still be 99
 }
