@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"snugweb/handlers"
 
 	"github.com/gorilla/mux"
 )
@@ -10,10 +11,9 @@ import (
 func main() {
 	router := mux.NewRouter()
 
-	router.
-		HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
-			rw.Write([]byte("Hello World\n"))
-		})
+	hello := handlers.NewHello()
+
+	router.HandleFunc("/", hello.ServeHTTP)
 
 	log.Fatal(http.ListenAndServe(":9000", router))
 }
