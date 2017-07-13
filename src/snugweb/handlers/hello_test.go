@@ -15,11 +15,11 @@ func TestHello(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", nil)
 
 	// Create the response
-	rr := httptest.NewRecorder()
+	rw := httptest.NewRecorder()
 
 	// Issue the request
-	handler.ServeHTTP(rr, r)
+	handler.ServeHTTP(rw, r)
 
 	// Assertions for all the things
-	assert.Equal(t, rr.Code, 200, "Code must be a 200")
+	assert.Equal(t, rw.Code, 200, "Code must be a 200")
 }

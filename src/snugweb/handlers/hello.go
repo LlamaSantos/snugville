@@ -18,5 +18,6 @@ type Hello struct {
 func (h *Hello) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	h.calls++
 	s := fmt.Sprintf("Hello World %v times\n", h.calls)
+	rw.Header().Add("Content-Type", "plain/text")
 	rw.Write([]byte(s))
 }

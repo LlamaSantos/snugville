@@ -50,12 +50,14 @@ func (fp ForgetfulPerson) Called() int {
 func Example3() {
 	fmt.Println("----- Example 3 -----")
 
-	write := func(n Nameable) {
+	write := func(wg *sync.WaitGroup, n Nameable) {
 		fmt.Printf("Person: %s\n", n.ToName())
+		wg.Done()
 	}
 
-	called := func(c Callable) {
+	called := func(wg *sync.WaitGroup, c Callable) {
 		fmt.Printf("%+v has been called %v times\n", c, c.Called())
+		wg.Done()
 	}
 
 	// Because we need to keep state, we have to initialize a new instance of FunctionalPerson.
@@ -65,14 +67,21 @@ func Example3() {
 	person1 := new(FunctionalPerson)
 	person1.First = "Jimmy"
 	person1.Last = "Hoffa"
-	write(person1)
-	called(person1)
+	var wg2 sync.WaitGroup
+	wg2.Add(2)
+	go write(&wg2, person1)
+	go called(&wg2, person1)
+	wg2.Wait()
 
 	// We need to look at receivers vs pointer-receivers
 	forgetme := new(ForgetfulPerson)
 	forgetme.First = "Mike"
 	forgetme.Last = "Tyson"
-	forgetme.called = 99 // neufballons
-	write(forgetme)      // Should increment
-	called(forgetme)     // Will still be 99
+	// forgetme.called = 0 // neufballons
+
+	var wg1 sync.WaitGroup
+	wg1.Add(2)
+	go write(&wg1, forgetme)  // Should increment
+	go called(&wg1, forgetme) // Will still be 99
+	wg1.Wait()
 }

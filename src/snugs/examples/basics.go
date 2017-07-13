@@ -108,7 +108,6 @@ func showMeTheLoops() {
 	for k, v := range m {
 		kk += (k + v)
 	}
-
 }
 
 func conditionals() {

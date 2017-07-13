@@ -40,7 +40,7 @@ func typing() {
 
 	fmt.Printf("Are we a better Person? %+v\n", other)
 	fmt.Printf("Does %s have the last name %s?\n", other.First, other.Last)
-	fmt.Printf("A formatted name %s", other.ToName())
+	fmt.Printf("A formatted name %s\n", other.ToName())
 
 	op := func(p Nameable) {
 		fmt.Printf("This should also work, %+v\n", p.ToName())
